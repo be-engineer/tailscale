@@ -114,7 +114,8 @@ type CapabilityVersion int
 //   - 72: 2023-08-23: TS-2023-006 UPnP issue fixed; UPnP can now be used again
 //   - 73: 2023-09-01: Non-Windows clients expect to receive ClientVersion
 //   - 74: 2023-09-18: Client understands NodeCapMap
-const CurrentCapabilityVersion CapabilityVersion = 74
+//   - 75: 2023-09-20: Client understands ExitNodeDNSResolvers for IsWireGuardOnly nodes
+const CurrentCapabilityVersion CapabilityVersion = 75
 
 type StableID string
 
