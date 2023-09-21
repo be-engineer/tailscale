@@ -6,7 +6,8 @@ import (
 )
 
 func GetPolicyString(key Key, defVal string) (string, error) {
-	s, err := getHandler().ReadString(string(key))
+	windowsHandler := &windowsHandler{}
+	s, err := windowsHandler.ReadString(string(key))
 	if errors.Is(err, ErrNoSuchKey) {
 		return defVal, nil
 	}
