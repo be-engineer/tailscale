@@ -130,8 +130,8 @@ func runWindowsService(pol *logpolicy.Policy) error {
 	go func() {
 		osdiag.LogSupportInfo(logger.WithPrefix(log.Printf, "Support Info: "), osdiag.LogSupportInfoReasonStartup)
 	}()
-
-	if winutil.GetPolicyInteger("LogSCMInteractions", 0) != 0 {
+	logSCMInteractions, _ := winutil.GetPolicyInteger("LogSCMInteractions")
+	if logSCMInteractions != 0 {
 		syslog, err := eventlog.Open(serviceName)
 		if err == nil {
 			syslogf = func(format string, args ...any) {
@@ -158,7 +158,8 @@ func (service *ipnService) Execute(args []string, r <-chan svc.ChangeRequest, ch
 	syslogf("Service start pending")
 
 	svcAccepts := svc.AcceptStop
-	if winutil.GetPolicyInteger("FlushDNSOnSessionUnlock", 0) != 0 {
+	flushDNSOnSessionUnlock, _ := winutil.GetPolicyInteger("FlushDNSOnSessionUnlock")
+	if flushDNSOnSessionUnlock != 0 {
 		svcAccepts |= svc.AcceptSessionChange
 	}
 

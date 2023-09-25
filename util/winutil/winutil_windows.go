@@ -47,38 +47,38 @@ func GetDesktopPID() (uint32, error) {
 	return pid, nil
 }
 
-func getPolicyString(name, defval string) string {
+func getPolicyString(name string) (string, error) {
 	s, err := getRegStringInternal(regPolicyBase, name)
 	if err != nil {
 		// Fall back to the legacy path
-		return getRegString(name, defval)
+		return getRegString(name)
 	}
-	return s
+	return s, err
 }
 
-func getPolicyInteger(name string, defval uint64) uint64 {
+func getRegString(name string) (string, error) {
+	s, err := getRegStringInternal(regBase, name)
+	if err != nil {
+		return "", err
+	}
+	return s, err
+}
+
+func getPolicyInteger(name string) (uint64, error) {
 	i, err := getRegIntegerInternal(regPolicyBase, name)
 	if err != nil {
 		// Fall back to the legacy path
-		return getRegInteger(name, defval)
+		return getRegInteger(name)
 	}
-	return i
+	return i, err
 }
 
-func getRegString(name, defval string) string {
-	s, err := getRegStringInternal(regBase, name)
-	if err != nil {
-		return defval
-	}
-	return s
-}
-
-func getRegInteger(name string, defval uint64) uint64 {
+func getRegInteger(name string) (uint64, error) {
 	i, err := getRegIntegerInternal(regBase, name)
 	if err != nil {
-		return defval
+		return 0, err
 	}
-	return i
+	return i, err
 }
 
 func getRegStringInternal(subKey, name string) (string, error) {

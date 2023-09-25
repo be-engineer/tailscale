@@ -13,13 +13,13 @@ import (
 
 const regBase = ``
 
-func getPolicyString(name, defval string) string { return defval }
+func getPolicyString(name string) (string, error) { return "", nil }
 
-func getPolicyInteger(name string, defval uint64) uint64 { return defval }
+func getPolicyInteger(name string) (uint64, error) { return 0, nil }
 
-func getRegString(name, defval string) string { return defval }
+func getRegString(name string) (string, error) { return "", nil }
 
-func getRegInteger(name string, defval uint64) uint64 { return defval }
+func getRegInteger(name string) (uint64, error) { return 0, nil }
 
 func isSIDValidPrincipal(uid string) bool { return false }
 
