@@ -1,4 +1,4 @@
-# Tailscale
+# Tailscale 类似zerotie的内网穿透软件
 
 https://tailscale.com
 
